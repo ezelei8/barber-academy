@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   BARBER ACADEMY — DESIGN TOKENS
+   Premium / dark / masculine / technological. No barber-pole clichés.
+   ========================================================================== */
+
+:root {
+  /* Base surfaces */
+  --color-carbon-950: #08080a;
+  --color-carbon-900: #0c0c0f;
+  --color-carbon-850: #121216;
+  --color-carbon-800: #18181d;
+  --color-carbon-700: #222227;
+  --color-carbon-600: #2f2f36;
+  --color-carbon-500: #3d3d45;
+
+  /* Foreground */
+  --color-bone-100: #f7f6f3;
+  --color-bone-200: #e9e7e1;
+  --color-bone-400: #b8b6b0;
+  --color-bone-600: #86847e;
+  --color-bone-700: #67655f;
+
+  /* Accent — warm brass/gold, single accent kept disciplined */
+  --color-gold-300: #f0d497;
+  --color-gold-400: #e3ba64;
+  --color-gold-500: #d4a24a;
+  --color-gold-600: #b3853a;
+  --color-gold-700: #8a662c;
+
+  /* Semantic */
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #60a5fa;
+
+  --background: var(--color-carbon-950);
+  --foreground: var(--color-bone-100);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-carbon-950: var(--color-carbon-950);
+  --color-carbon-900: var(--color-carbon-900);
+  --color-carbon-850: var(--color-carbon-850);
+  --color-carbon-800: var(--color-carbon-800);
+  --color-carbon-700: var(--color-carbon-700);
+  --color-carbon-600: var(--color-carbon-600);
+  --color-carbon-500: var(--color-carbon-500);
+
+  --color-bone-100: var(--color-bone-100);
+  --color-bone-200: var(--color-bone-200);
+  --color-bone-400: var(--color-bone-400);
+  --color-bone-600: var(--color-bone-600);
+  --color-bone-700: var(--color-bone-700);
+
+  --color-gold-300: var(--color-gold-300);
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-700: var(--color-gold-700);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas,
+    monospace;
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-xp-float: xp-float 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes xp-float {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.9);
+    }
+    15% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(-6px) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-28px) scale(0.98);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+* {
+  border-color: var(--color-carbon-700);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-carbon-950);
+}
+
+/* Slim, premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-carbon-600);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-carbon-500);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(
+    100deg,
+    var(--color-gold-300),
+    var(--color-gold-500) 45%,
+    var(--color-gold-300)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.shimmer-bg {
+  background: linear-gradient(
+    110deg,
+    var(--color-carbon-800) 8%,
+    var(--color-carbon-700) 18%,
+    var(--color-carbon-800) 33%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.4s linear infinite;
+}
+
+/* Hide scrollbar for horizontal chip rows without losing scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe-area padding for mobile bottom nav */
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
