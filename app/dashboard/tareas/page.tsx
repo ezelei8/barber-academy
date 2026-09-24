@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getCurrentStudent } from "@/lib/get-current-student";
 import { getTaskCounts } from "@/lib/gamification";
-import { getTaskFeedbackMap } from "@/lib/store";
 import { MODULES, TASKS } from "@/lib/data/course-content";
 import { TaskCard } from "@/components/dashboard/task-card";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,7 +10,6 @@ export const metadata: Metadata = { title: "Mis tareas" };
 export default async function TareasPage() {
   const student = await getCurrentStudent();
   const counts = getTaskCounts(student);
-  const feedbackMap = await getTaskFeedbackMap(student.id);
 
   const moduleTitleByTaskId = new Map<string, string>();
   for (const m of MODULES) for (const taskId of m.taskIds) moduleTitleByTaskId.set(taskId, m.title);
@@ -35,7 +33,7 @@ export default async function TareasPage() {
         {TASKS.map((task) => (
           <TaskCard
             key={task.id}
-            task={{ ...task, feedback: feedbackMap[task.id] ?? task.feedback }}
+            task={task}
             completed={student.completedTaskIds.includes(task.id)}
             moduleTitle={moduleTitleByTaskId.get(task.id) ?? ""}
           />
