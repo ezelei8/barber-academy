@@ -3,10 +3,10 @@ import { auth } from "@/auth";
 import { completeTask } from "@/lib/store";
 
 /**
- * Submits/completes a task for the current user — writes a real row to
- * task_submissions (content, completed_at). File uploads (PHOTO_UPLOAD /
- * VIDEO_UPLOAD) still need an object storage provider — see README
- * "Almacenamiento" — this only persists the `content` text field, not files.
+ * Marca una tarea como completada para el usuario actual (demo en memoria —
+ * ver lib/store.ts). File uploads (PHOTO_UPLOAD / VIDEO_UPLOAD) todavía
+ * necesitan un proveedor de almacenamiento — esto solo registra el campo
+ * `content` de texto, no archivos.
  */
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
@@ -16,7 +16,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const body = await req.json().catch(() => ({}));
   const content = typeof body?.content === "string" ? body.content : undefined;
 
-  const result = await completeTask(session.user.id, id, content);
+  const result = completeTask(id);
   if (!result.ok) return NextResponse.json({ error: result.error }, { status: 404 });
 
   return NextResponse.json({ ...result, receivedContent: Boolean(content) });
