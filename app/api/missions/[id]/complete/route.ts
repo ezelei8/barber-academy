@@ -7,6 +7,6 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   if (!session?.user?.id) return NextResponse.json({ error: "No autorizado." }, { status: 401 });
 
   const { id } = await params;
-  const result = await completeMission(session.user.id, id);
+  const result = completeMission(id);
   return NextResponse.json(result);
 }
