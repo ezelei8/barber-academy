@@ -11,8 +11,8 @@ import { BRAND } from "@/lib/brand";
 // const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: `${BRAND.name} — ${BRAND.tagline}`,
-  description: BRAND.description,
+  title: BRAND.metaTitle,
+  description: BRAND.metaDescription,
 };
 
 export default function RootLayout({
